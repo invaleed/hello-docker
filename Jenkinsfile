@@ -37,6 +37,15 @@ pipeline {
             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
           }
       }
+      
+      post {
+        success {
+          slackSend (color: '#00FF00', message: "Deployment Completed Successfully: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        }
+        failure {
+          slackSend (color: '#FF0000', message: "Deployment Failed !: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        }
+      }
     }
   }
 }
