@@ -4,11 +4,14 @@ pipeline {
   stages {
 
     stage('Build') {
+      environment {
+        DOCKERHUB_CREDS = credentials('dockerhub')
+      }
       steps {
           // Build new image
           sh "docker build -t invaleed/hello-docker:${env.GIT_COMMIT} ."
           // Publish new image
-          sh "docker login --username $DOCKERHUB_CREDS_USR --password $JENKINS_TOKEN && docker push invaleed/hello-docker:${env.GIT_COMMIT}"
+          sh "docker login --username $DOCKERHUB_CREDS_USR --password $DOCKERHUB_CREDS_PSW && docker push invaleed/hello-docker:${env.GIT_COMMIT}"
       }
     }
 
