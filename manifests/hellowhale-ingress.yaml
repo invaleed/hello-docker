@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hellowhale-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: app.invaleed.web.id
+    http:
+      paths:
+      - path: /hellowhale
+        backend:
+          serviceName: hellowhale
+          servicePort: 80

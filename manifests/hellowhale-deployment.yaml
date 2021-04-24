@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellowhale
+  labels:
+    app: hellowhale
+spec:
+  selector:
+    matchLabels:
+      app: hellowhale
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: hellowhale
+        tier: web
+    spec:
+      containers:
+      - name: hellowhale
+        image: invaleed/hellowhale:latest
+        ports:
+        - containerPort: 80
