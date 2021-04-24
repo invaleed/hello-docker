@@ -15,7 +15,7 @@ pipeline {
       }
     }
 
-    stage('Deploy E2E') {
+    stage('Deploy Dev') {
       steps {
           sh "rm -rf hello-docker-deploy"  
           sh "git clone https://github.com/invaleed/hello-docker-deploy.git"
