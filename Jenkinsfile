@@ -31,7 +31,7 @@ pipeline {
 
     stage('Deploy to Prod') {
       steps {
-        input message:'Approve deployment?'
+        input message:'Approve deployment to PRD?'
           dir("hello-docker-deploy") {
             sh "cd ./prd && kustomize edit set image invaleed/hello-docker:${env.GIT_COMMIT}"
             sh "git commit -am 'Publish new version' && git push || echo 'no changes'"
