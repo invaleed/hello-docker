@@ -8,7 +8,7 @@ pipeline {
           // Build new image
           sh "docker build -t invaleed/hello-docker:${env.GIT_COMMIT} ."
           // Publish new image
-          sh "docker login --username $DOCKERHUB_CREDS_USR --password $DOCKERHUB_CREDS_PSW && docker push invaleed/hello-docker:${env.GIT_COMMIT}"
+          sh "docker login --username $DOCKERHUB_CREDS_USR --password $JENKINS_TOKEN && docker push invaleed/hello-docker:${env.GIT_COMMIT}"
       }
     }
 
@@ -16,6 +16,7 @@ pipeline {
       steps {
           sh "rm -rf hello-docker-deploy"  
           sh "git clone https://github.com/invaleed/hello-docker-deploy.git"
+          sh "git config --global user.name 'Ramadoni'"
           sh "git config --global user.email 'ramadoni.ashudi@gmail.com'"
 
           dir("hello-docker-deploy") {
